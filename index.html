@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple habit tracker.">
+  <title>Habit Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <h1>Habit Tracker</h1>
+
+    <form class="add-form" id="habit-form">
+      <label class="sr-only" for="habit-input">New habit name</label>
+      <input id="habit-input" type="text" maxlength="60" placeholder="Enter a habit" autocomplete="off" required>
+      <button type="submit">Add habit</button>
+    </form>
+
+    <ul class="habit-list" id="habit-list" aria-live="polite"></ul>
+  </main>
+</body>
+</html>
