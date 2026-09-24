@@ -1,8 +1,10 @@
 const STORAGE_KEY = 'habit-tracker-habits';
+const THEME_KEY = 'habit-tracker-theme';
 
 const habitForm = document.querySelector('#habit-form');
 const habitInput = document.querySelector('#habit-input');
 const habitList = document.querySelector('#habit-list');
+const themeToggle = document.querySelector('#theme-toggle');
 
 let habits = loadHabits();
 const todayKey = getDateKey(new Date());
@@ -133,5 +135,39 @@ function deleteHabit(habitId) {
   renderHabits();
 }
 
+// Reads the saved theme, falling back to the system preference.
+function loadTheme() {
+  try {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      return savedTheme;
+    }
+  } catch (error) {
+    // Ignores unavailable storage and uses the system preference.
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+// Applies a theme to the page and updates the toggle's pressed state.
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+}
+
+// Switches between light and dark mode and remembers the choice.
+function toggleTheme() {
+  const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(nextTheme);
+
+  try {
+    localStorage.setItem(THEME_KEY, nextTheme);
+  } catch (error) {
+    // Keeps the theme for this visit when storage is unavailable.
+  }
+}
+
 habitForm.addEventListener('submit', addHabit);
+themeToggle.addEventListener('click', toggleTheme);
+applyTheme(loadTheme());
 renderHabits();

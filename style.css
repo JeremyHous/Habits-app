@@ -6,6 +6,22 @@
   --line: #e3e8dd;
   --leaf: #4d765b;
   --lime: #d7ef72;
+  --lime-hover: #c8e464;
+  --on-lime: #2f523e;
+  --focus-ring: rgba(77, 118, 91, 0.12);
+  --danger: #a64f3d;
+}
+
+:root[data-theme="dark"] {
+  --ink: #e6ebe1;
+  --muted: #93a293;
+  --paper: #161b17;
+  --white: #202822;
+  --line: #334036;
+  --leaf: #8fbf9d;
+  --focus-ring: rgba(143, 191, 157, 0.2);
+  --danger: #e08a76;
+  color-scheme: dark;
 }
 
 * {
@@ -35,12 +51,35 @@ button {
   padding: 72px 0;
 }
 
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
 h1 {
-  margin: 0 0 32px;
+  margin: 0;
   color: var(--leaf);
   font-size: clamp(2.5rem, 7vw, 4.5rem);
   letter-spacing: -0.06em;
   line-height: 1;
+}
+
+.theme-toggle {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 8px 14px;
+  color: var(--ink);
+  background: var(--white);
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+}
+
+.theme-toggle:hover {
+  border-color: var(--leaf);
 }
 
 .add-form {
@@ -64,14 +103,14 @@ h1 {
 
 .add-form input:focus {
   border-color: var(--leaf);
-  box-shadow: 0 0 0 3px rgba(77, 118, 91, 0.12);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .add-form button {
   border: 0;
   border-radius: 4px;
   padding: 0 22px;
-  color: #2f523e;
+  color: var(--on-lime);
   background: var(--lime);
   font-family: Arial, sans-serif;
   font-size: 0.95rem;
@@ -79,7 +118,7 @@ h1 {
 }
 
 .add-form button:hover {
-  background: #c8e464;
+  background: var(--lime-hover);
 }
 
 .habit-list {
@@ -130,7 +169,7 @@ h1 {
 }
 
 .delete-habit:hover {
-  color: #a64f3d;
+  color: var(--danger);
   text-decoration: underline;
 }
 
